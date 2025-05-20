@@ -1,0 +1,4 @@
+.searchhh::first-letter{
+  text-transform: uppercase;
+  color: black;
+}

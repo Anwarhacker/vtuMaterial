@@ -5,6 +5,7 @@ import {
   Routes,
   Route,
   useNavigate,
+  useLocation
 } from "react-router-dom";
 import { useEffect } from "react";
 
@@ -40,36 +41,22 @@ import Firstsem from "./aisemesters/firstsem";
 import Secondsem from "./aisemesters/Secondsem";
 
 const AppContent = () => {
-  useEffect(() => {
-    const meta = document.createElement("meta");
-    meta.name = "viewport";
-    meta.content =
-      "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no";
-    document.getElementsByTagName("head")[0].appendChild(meta);
-
-    // Only prevent pinch zoom, allow normal scrolling
-    const handleTouchStart = (event) => {
-      if (event.touches.length > 1) {
-        event.preventDefault();
-      }
-    };
-
-    document.addEventListener("touchstart", handleTouchStart, {
-      passive: false,
-    });
-
-    return () => {
-      document.removeEventListener("touchstart", handleTouchStart);
-    };
-  }, []);
-
   const navigate = useNavigate();
+  const location = useLocation(); // Add this import at the top
+
+  const toggleDialogue = () => {
+    if (location.pathname === '/dialoguebox') {
+      navigate(-1); // Go back to previous route
+    } else {
+      navigate('/dialoguebox');
+    }
+  };
 
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
       <button
-        onClick={() => navigate("/dialoguebox")}
+        onClick={toggleDialogue}
         className="p-2 fixed z-50 top-1/2 -translate-y-1/2 right-2 text-white bg-gradient-to-r from-blue-500 to-purple-600 block rounded-full w-10 h-10
           hover:scale-110 hover:rotate-12 
           active:scale-95
@@ -79,7 +66,9 @@ const AppContent = () => {
           shadow-lg hover:shadow-xl
           hover:from-blue-600 hover:to-purple-700 border-white border-2"
       >
-        <span className="inline-block transform transition-transform">D</span>
+        <span className="inline-block transform transition-transform">
+          {location.pathname === '/dialoguebox' ? '×' : 'D'}
+        </span>
       </button>
       <main className="flex-grow w-full">
         <Routes>
