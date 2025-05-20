@@ -1,23 +1,27 @@
-import { useState } from 'react';
+import { useState } from "react";
 
 const Search = () => {
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
   const [isFocused, setIsFocused] = useState(false);
 
   const handleSearch = (e) => {
     e.preventDefault();
     if (searchTerm.trim()) {
-      console.log('Searching for:', searchTerm);
+      console.log("Searching for:", searchTerm);
       // Add your search logic here (e.g., API call or navigation)
     }
   };
 
   return (
-    <div className="w-full mx-auto bg-gradient-to-r from-blue-600 to-indigo-600 p-12 sm:p-16 mt-6 rounded-2xl shadow-2xl">
-      <h1 className="text-3xl sm:text-4xl font-extrabold text-center mb-8 text-white tracking-tight animate-fade-in">
-        Government Engineering College
-      </h1>
-      <div className="max-w-4xl mx-auto">
+    <div className="w-full max-w-3xl mx-auto bg-gradient-to-r from-blue-600 to-indigo-600 p-8 sm:p-12 mt-8 rounded-2xl shadow-2xl">
+      <div className="text-3xl sm:text-4xl searchhh font-extrabold text-center mb-8 text-white tracking-tight animate-fade-in">
+        <div className="flex sm:flex-row justify-center searchhh gap-2 sm:gap-4">
+          <h1>Search ,</h1>
+          <h1>Click ,</h1>
+        </div>
+        <h1>Conquer</h1>
+      </div>
+      <div className="max-w-xl mx-auto">
         <form onSubmit={handleSearch} className="relative">
           <div className="relative flex items-center">
             <input
@@ -49,15 +53,15 @@ const Search = () => {
           {isFocused && (
             <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-lg shadow-xl p-4 z-10 animate-slide-down">
               <p className="text-sm text-gray-600">
-                Try searching for: <span className="font-semibold">Computer Science</span>,{' '}
-                <span className="font-semibold">AI Syllabus</span>, or{' '}
+                Try searching for:{" "}
+                <span className="font-semibold">Computer Science</span>,{" "}
+                <span className="font-semibold">AI Syllabus</span>, or{" "}
                 <span className="font-semibold">Lab Facilities</span>
               </p>
             </div>
           )}
         </form>
       </div>
-      
     </div>
   );
 };
